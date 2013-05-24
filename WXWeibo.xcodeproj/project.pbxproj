@@ -142,6 +142,9 @@
 		188BF0F916AD3CB3006A2602 /* SinaWeibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 188BF0F116AD3CB3006A2602 /* SinaWeibo.m */; };
 		188BF0FA16AD3CB3006A2602 /* SinaWeiboAuthorizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 188BF0F316AD3CB3006A2602 /* SinaWeiboAuthorizeView.m */; };
 		188BF0FB16AD3CB3006A2602 /* SinaWeiboRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 188BF0F616AD3CB3006A2602 /* SinaWeiboRequest.m */; };
+		C8AC08A0174F7B4C009D49FF /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C8AC089F174F7B4C009D49FF /* libicucore.dylib */; };
+		C8AC08A6174F7B7E009D49FF /* RegexKitLite.html in Resources */ = {isa = PBXBuildFile; fileRef = C8AC08A4174F7B7E009D49FF /* RegexKitLite.html */; };
+		C8AC08A7174F7B7E009D49FF /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = C8AC08A5174F7B7E009D49FF /* RegexKitLite.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -325,6 +328,10 @@
 		188BF0F516AD3CB3006A2602 /* SinaWeiboRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboRequest.h; sourceTree = "<group>"; };
 		188BF0F616AD3CB3006A2602 /* SinaWeiboRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiboRequest.m; sourceTree = "<group>"; };
 		188BF0FC16AD3D4A006A2602 /* CONSTS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CONSTS.h; sourceTree = "<group>"; };
+		C8AC089F174F7B4C009D49FF /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		C8AC08A3174F7B7E009D49FF /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		C8AC08A4174F7B7E009D49FF /* RegexKitLite.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = RegexKitLite.html; sourceTree = "<group>"; };
+		C8AC08A5174F7B7E009D49FF /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,6 +339,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8AC08A0174F7B4C009D49FF /* libicucore.dylib in Frameworks */,
 				188BF02016AD1D5E006A2602 /* CoreText.framework in Frameworks */,
 				188BF01E16AD1CDC006A2602 /* QuartzCore.framework in Frameworks */,
 				188BEFC216AD1968006A2602 /* UIKit.framework in Frameworks */,
@@ -381,6 +389,7 @@
 		188BEFC016AD1968006A2602 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C8AC089F174F7B4C009D49FF /* libicucore.dylib */,
 				188BF01F16AD1D5E006A2602 /* CoreText.framework */,
 				188BF01D16AD1CDC006A2602 /* QuartzCore.framework */,
 				188BEFC116AD1968006A2602 /* UIKit.framework */,
@@ -460,6 +469,7 @@
 		188BF00016AD1B7F006A2602 /* openSource */ = {
 			isa = PBXGroup;
 			children = (
+				C8AC08A2174F7B7E009D49FF /* RegexKitLite */,
 				188BF0EA16AD3CB3006A2602 /* sinaweibo_ios_sdk */,
 				188BF01616AD1C0F006A2602 /* DDMenu */,
 				188BF01216AD1BE6006A2602 /* FontLabel */,
@@ -697,6 +707,16 @@
 			path = SinaWeibo;
 			sourceTree = "<group>";
 		};
+		C8AC08A2174F7B7E009D49FF /* RegexKitLite */ = {
+			isa = PBXGroup;
+			children = (
+				C8AC08A3174F7B7E009D49FF /* RegexKitLite.h */,
+				C8AC08A4174F7B7E009D49FF /* RegexKitLite.html */,
+				C8AC08A5174F7B7E009D49FF /* RegexKitLite.m */,
+			);
+			path = RegexKitLite;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -841,6 +861,7 @@
 				18100C3416AE84C80093D3D4 /* fontColor.plist in Resources */,
 				18100C4216AEA3AA0093D3D4 /* timeline_new_status_background@2x.png in Resources */,
 				18100C4316AEA3AA0093D3D4 /* timeline_new_status_background.png in Resources */,
+				C8AC08A6174F7B7E009D49FF /* RegexKitLite.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -888,6 +909,7 @@
 				18100C3A16AE8F850093D3D4 /* UserModel.m in Sources */,
 				184F931C16AF807E009359AB /* WeiboCell.m in Sources */,
 				184F932016AF8095009359AB /* WeiboView.m in Sources */,
+				C8AC08A7174F7B7E009D49FF /* RegexKitLite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

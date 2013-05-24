@@ -23,6 +23,8 @@
     WeiboView       *_repostView;           //转发的微博视图
 }
 
+@property(nonatomic,copy) NSString *parsedText; //增加了超链接的文本
+
 //微博模型对象
 @property(nonatomic,retain)WeiboModel *weiboModel;
 //当前的微博视图，是否是转发的

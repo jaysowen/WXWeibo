@@ -11,6 +11,7 @@
 #import "WeiboModel.h"
 #import "UIImageView+WebCache.h"
 #import "ThemeImageView.h"
+#import "RegexKitLite.h"
 
 #define LIST_FONT   14.0f           //列表中文本字体
 #define LIST_REPOST_FONT  13.0f;    //列表中转发的文本字体
@@ -72,10 +73,50 @@
         _repostView = [[WeiboView alloc] initWithFrame:CGRectZero];
         _repostView.isRepost = YES;
         [self addSubview:_repostView];        
-    }    
+    }
+    
+    [self parseLink];
+}
+
+- (void)parseLink {
+    NSString *text = self.weiboModel.text;
+    
+    /*
+     * 微博中有三种文本需要超链接：
+     * 1. @麻子
+     * 2. #话题#
+     * 3. http://www.baidu.com
+     */
+    NSString *regex = @"(@\\w+)|(#\\w+#)|(http(s)?://(\\w|.)+)";
+    //NSString *regex = @"(@\\w+)|(#\\w+#)|(http(s)?://([a-zA-Z0-9._-]|/|\\?|=|&)+)";
+    NSArray *array = [text componentsMatchedByRegex:regex];
+    for (NSString *str in array) {
+        /*
+         * 集中文本的超链接跳转：
+         * @麻子:     <a href='user://@用户'></a>
+         * #话题#:    <a href='topic://#话题#'></a>
+         * http://www.baidu.com: <a href='http://www.baidu.com'></a>
+         */
+        NSString *replacement;
+        if ([str hasPrefix:@"@"]) {
+             replacement = [NSString stringWithFormat:@"<a href='user://%@'>%@</a>", str, str];
+        } else if ([str hasPrefix:@"#"]) {
+             replacement = [NSString stringWithFormat:@"<a href='topic://%@'>%@</a>", str, str];
+        } else if ([str hasPrefix:@"http://"]) {
+             replacement = [NSString stringWithFormat:@"<a href='%@'>%@</a>", str, str];
+        } else {
+            replacement = nil;
+        }
+       
+        //text = [text stringByReplacingOccurrencesOfRegex:str withString:replacement];
+        text = [text stringByReplacingOccurrencesOfString:str withString:replacement];
+    }
+    
+    self.parsedText = text;
 }
 
 //layoutSubviews 展示数据、子视图布局
+//此方法有可能会被调用多次
 - (void)layoutSubviews {
     [super layoutSubviews];
     
@@ -88,7 +129,8 @@
     if (self.isRepost) {
         _textLabel.frame = CGRectMake(10, 10, self.width-20, 0);
     }
-    _textLabel.text = _weiboModel.text;
+    //_textLabel.text = _weiboModel.text;
+    _textLabel.text = self.parsedText;
     //文本内容尺寸
     CGSize textSize = _textLabel.optimumSize;
     _textLabel.height = textSize.height;
