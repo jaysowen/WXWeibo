@@ -11,6 +11,8 @@
 #import "WeiboView.h"
 #import "WeiboModel.h"
 #import "UIImageView+WebCache.h"
+#import "UIUtils.h"
+#import "RegexKitLite.h"
 
 @implementation WeiboCell
 
@@ -69,8 +71,15 @@
     _createLabel.textColor = [UIColor blueColor];
     [self.contentView addSubview:_createLabel];
     
+    //微博内容
     _weiboView = [[WeiboView alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_weiboView];
+    
+    //设置cell的选中背景
+    // 选中的背景视图，不必设置frame，会自适应
+    UIView *selectedbackgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+    selectedbackgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"statusdetail_cell_sepatator"]];
+    self.selectedBackgroundView = selectedbackgroundView;
 }
 
 - (void)layoutSubviews {
@@ -85,7 +94,33 @@
     _nickLabel.frame = CGRectMake(50, 5, 200, 20);
     _nickLabel.text = _weiboModel.user.screen_name;
     
+    //发布时间
+    //源日期:       Tue May 23 17:46:32 +800 2011
+    //源日期格式:    E M d HH:mm:ss Z yyyy
+    //目标日期:     01-23 14:52
+    NSString *createDate = _weiboModel.createDate;
+    if (createDate == nil) {
+        _createLabel.hidden = YES;
+    } else {
+        _createLabel.hidden = NO;
+        NSString *dateString = [UIUtils fomateString:createDate];
+        _createLabel.text = dateString;
+        _createLabel.frame = CGRectMake(50, self.height-20, 100, 20);
+        [_createLabel sizeToFit];        
+    }
     
+    //微博来源
+    //source: "<a href="http://weibo.com" rel="nofollow">新浪微博</a>"
+    if (_weiboModel.source == nil) {
+        _sourceLabel.hidden = YES;
+    } else {
+        _sourceLabel.hidden = NO;
+        NSString *parsedSource = [self getParsedSource:_weiboModel.source];
+        _sourceLabel.text = [NSString stringWithFormat:@"来自%@", parsedSource];
+        _sourceLabel.frame = CGRectMake(_createLabel.right+20, self.height-20, 100, 20);
+        [_sourceLabel sizeToFit];
+    }
+
     //微博视图_weiboView
     _weiboView.weiboModel = _weiboModel;
     //获取微博视图的高度
@@ -93,6 +128,19 @@
     _weiboView.frame = CGRectMake(50, _nickLabel.bottom+10, kWeibo_Width_List, h);
     
     
+}
+
+- (NSString *)getParsedSource:(NSString *)source {
+    NSString *parsedSource;
+    NSArray *matches = [source componentsMatchedByRegex:@">\\w+<"];
+    if (matches.count > 0) {
+        NSString *rawSource = matches[0];
+        parsedSource = [rawSource substringWithRange:NSMakeRange(1, rawSource.length-2)];
+    } else {
+        parsedSource = nil;
+    }
+    
+    return parsedSource;
 }
 
 @end

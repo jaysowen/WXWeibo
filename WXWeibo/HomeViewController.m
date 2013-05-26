@@ -38,6 +38,10 @@
     UIBarButtonItem *logoutItem = [[UIBarButtonItem alloc] initWithTitle:@"注销" style:UIBarButtonItemStyleBordered target:self action:@selector(logoutAction:)];
     self.navigationItem.leftBarButtonItem = [logoutItem autorelease];
     
+    //WeiboTableView
+    _tableView = [[WeiboTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-20-49-44) style:UITableViewStylePlain];
+    [self.view addSubview:_tableView];
+    
     //判断是否认证
     if (self.sinaweibo.isAuthValid) {
         //加载微博列表数据
@@ -71,39 +75,11 @@
         [weibo release];
     }
     
-    self.data = weibos;
+    self.tableView.data = weibos;
     
     //刷新tableView
     [self.tableView reloadData];
 }
-
-#pragma mark - UITableView delegate
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.data.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *identify = @"WeiboCell";
-    WeiboCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
-    if (cell == nil) {
-        cell = [[[WeiboCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify] autorelease];
-    }
-    
-    WeiboModel *weibo = [self.data objectAtIndex:indexPath.row];
-    cell.weiboModel = weibo;
-    
-    return cell;
-}
-
-- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    WeiboModel *weibo = [self.data objectAtIndex:indexPath.row];
-    float height = [WeiboView getWeiboViewHeight:weibo isRepost:NO isDetail:NO];
-    
-    height += 50;
-    
-    return height;
-}
-
 
 #pragma mark - actions
 - (void)bindAction:(UIBarButtonItem *)buttonItem {

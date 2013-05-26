@@ -12,6 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "ThemeImageView.h"
 #import "RegexKitLite.h"
+#import "NSString+URLEncoding.h"
 
 #define LIST_FONT   14.0f           //列表中文本字体
 #define LIST_REPOST_FONT  13.0f;    //列表中转发的文本字体
@@ -25,6 +26,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self _initView];
+        _parsedText = [NSMutableString string];
     }
     return self;
 }
@@ -79,7 +81,16 @@
 }
 
 - (void)parseLink {
+    // 重置string
+    _parsedText.string = @"";
+    
     NSString *text = self.weiboModel.text;
+    
+    //判断当前微博是否为转发微博，若是，则将微博作者链接加上
+    if (self.isRepost) {
+        NSString *nickName= self.weiboModel.user.screen_name;
+        [_parsedText appendFormat:@"<a href='user://%@'>%@</a>: ", [nickName URLEncodedString], nickName];
+    }
     
     /*
      * 微博中有三种文本需要超链接：
@@ -97,13 +108,16 @@
          * #话题#:    <a href='topic://#话题#'></a>
          * http://www.baidu.com: <a href='http://www.baidu.com'></a>
          */
+        
         NSString *replacement;
         if ([str hasPrefix:@"@"]) {
-             replacement = [NSString stringWithFormat:@"<a href='user://%@'>%@</a>", str, str];
+             // 中文需要编码后才能被识别为url
+            replacement = [NSString stringWithFormat:@"<a href='user://%@'>%@</a>", [str URLEncodedString], str];
         } else if ([str hasPrefix:@"#"]) {
-             replacement = [NSString stringWithFormat:@"<a href='topic://%@'>%@</a>", str, str];
+             // 中文需要编码后才能被识别为url
+            replacement = [NSString stringWithFormat:@"<a href='topic://%@'>%@</a>", [str URLEncodedString], str];
         } else if ([str hasPrefix:@"http://"]) {
-             replacement = [NSString stringWithFormat:@"<a href='%@'>%@</a>", str, str];
+            replacement = [NSString stringWithFormat:@"<a href='%@'>%@</a>", str, str];
         } else {
             replacement = nil;
         }
@@ -112,7 +126,7 @@
         text = [text stringByReplacingOccurrencesOfString:str withString:replacement];
     }
     
-    self.parsedText = text;
+    [_parsedText appendString:text];
 }
 
 //layoutSubviews 展示数据、子视图布局
@@ -130,7 +144,7 @@
         _textLabel.frame = CGRectMake(10, 10, self.width-20, 0);
     }
     //_textLabel.text = _weiboModel.text;
-    _textLabel.text = self.parsedText;
+    _textLabel.text = _parsedText;
     //文本内容尺寸
     CGSize textSize = _textLabel.optimumSize;
     _textLabel.height = textSize.height;
@@ -213,6 +227,9 @@
     } else {
         textLabel.width = kWeibo_Width_List;
     }
+    if (isRepost) {
+        textLabel.width -= 20;
+    }
     
     textLabel.text = weiboModel.text;
     
@@ -242,8 +259,25 @@
 
 
 #pragma mark - RTLabel delegate
+// rtlabel超链接的点击事件
 - (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL*)url {
-
+    //NSString *urlString = [url absoluteString];
+    NSString *hostString = [url host];
+    hostString = [hostString URLDecodedString];
+    NSLog(@"%@", hostString);
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+

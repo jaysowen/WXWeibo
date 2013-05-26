@@ -8,11 +8,9 @@
 //
 
 #import "BaseViewController.h"
+#import "WeiboTableView.h"
 
-@interface HomeViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate,SinaWeiboRequestDelegate>
+@interface HomeViewController : BaseViewController<SinaWeiboRequestDelegate>
 
-
-@property(nonatomic,retain)NSArray *data;
-
-@property (retain, nonatomic) IBOutlet UITableView *tableView;
+@property (retain, nonatomic) WeiboTableView *tableView;
 @end

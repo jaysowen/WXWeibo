@@ -21,9 +21,8 @@
     UIImageView     *_image;                //微博图片
     ThemeImageView     *_repostBackgroudView;  //转发额微博视图背景
     WeiboView       *_repostView;           //转发的微博视图
+    NSMutableString *_parsedText;           //增加了超链接的文本
 }
-
-@property(nonatomic,copy) NSString *parsedText; //增加了超链接的文本
 
 //微博模型对象
 @property(nonatomic,retain)WeiboModel *weiboModel;

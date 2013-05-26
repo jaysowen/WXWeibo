@@ -142,6 +142,16 @@
 		188BF0F916AD3CB3006A2602 /* SinaWeibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 188BF0F116AD3CB3006A2602 /* SinaWeibo.m */; };
 		188BF0FA16AD3CB3006A2602 /* SinaWeiboAuthorizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 188BF0F316AD3CB3006A2602 /* SinaWeiboAuthorizeView.m */; };
 		188BF0FB16AD3CB3006A2602 /* SinaWeiboRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 188BF0F616AD3CB3006A2602 /* SinaWeiboRequest.m */; };
+		C81377BE17519CD700A85FA7 /* BaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C81377BD17519CD700A85FA7 /* BaseTableView.m */; };
+		C81377C917519D4B00A85FA7 /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C81377C117519D4B00A85FA7 /* blackArrow.png */; };
+		C81377CA17519D4B00A85FA7 /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C81377C217519D4B00A85FA7 /* blackArrow@2x.png */; };
+		C81377CB17519D4B00A85FA7 /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C81377C317519D4B00A85FA7 /* blueArrow.png */; };
+		C81377CC17519D4B00A85FA7 /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C81377C417519D4B00A85FA7 /* blueArrow@2x.png */; };
+		C81377CD17519D4B00A85FA7 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C81377C617519D4B00A85FA7 /* EGORefreshTableHeaderView.m */; };
+		C81377CE17519D4B00A85FA7 /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C81377C717519D4B00A85FA7 /* grayArrow.png */; };
+		C81377CF17519D4B00A85FA7 /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C81377C817519D4B00A85FA7 /* grayArrow@2x.png */; };
+		C83B33C8174FAD5800B61742 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = C83B33C7174FAD5800B61742 /* NSString+URLEncoding.m */; };
+		C864B7FB1751A2B600E3DD1D /* WeiboTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C864B7FA1751A2B600E3DD1D /* WeiboTableView.m */; };
 		C8AC08A0174F7B4C009D49FF /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C8AC089F174F7B4C009D49FF /* libicucore.dylib */; };
 		C8AC08A6174F7B7E009D49FF /* RegexKitLite.html in Resources */ = {isa = PBXBuildFile; fileRef = C8AC08A4174F7B7E009D49FF /* RegexKitLite.html */; };
 		C8AC08A7174F7B7E009D49FF /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = C8AC08A5174F7B7E009D49FF /* RegexKitLite.m */; };
@@ -328,6 +338,20 @@
 		188BF0F516AD3CB3006A2602 /* SinaWeiboRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboRequest.h; sourceTree = "<group>"; };
 		188BF0F616AD3CB3006A2602 /* SinaWeiboRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiboRequest.m; sourceTree = "<group>"; };
 		188BF0FC16AD3D4A006A2602 /* CONSTS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CONSTS.h; sourceTree = "<group>"; };
+		C81377BC17519CD700A85FA7 /* BaseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableView.h; sourceTree = "<group>"; };
+		C81377BD17519CD700A85FA7 /* BaseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableView.m; sourceTree = "<group>"; };
+		C81377C117519D4B00A85FA7 /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
+		C81377C217519D4B00A85FA7 /* blackArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackArrow@2x.png"; sourceTree = "<group>"; };
+		C81377C317519D4B00A85FA7 /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
+		C81377C417519D4B00A85FA7 /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
+		C81377C517519D4B00A85FA7 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
+		C81377C617519D4B00A85FA7 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		C81377C717519D4B00A85FA7 /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
+		C81377C817519D4B00A85FA7 /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
+		C83B33C6174FAD5800B61742 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+URLEncoding.h"; path = "../NSString+URLEncoding.h"; sourceTree = "<group>"; };
+		C83B33C7174FAD5800B61742 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+URLEncoding.m"; path = "../NSString+URLEncoding.m"; sourceTree = "<group>"; };
+		C864B7F91751A2B600E3DD1D /* WeiboTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboTableView.h; sourceTree = "<group>"; };
+		C864B7FA1751A2B600E3DD1D /* WeiboTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboTableView.m; sourceTree = "<group>"; };
 		C8AC089F174F7B4C009D49FF /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		C8AC08A3174F7B7E009D49FF /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		C8AC08A4174F7B7E009D49FF /* RegexKitLite.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = RegexKitLite.html; sourceTree = "<group>"; };
@@ -469,6 +493,9 @@
 		188BF00016AD1B7F006A2602 /* openSource */ = {
 			isa = PBXGroup;
 			children = (
+				C83B33C6174FAD5800B61742 /* NSString+URLEncoding.h */,
+				C83B33C7174FAD5800B61742 /* NSString+URLEncoding.m */,
+				C81377C017519D4B00A85FA7 /* EGOTableViewPullRefresh */,
 				C8AC08A2174F7B7E009D49FF /* RegexKitLite */,
 				188BF0EA16AD3CB3006A2602 /* sinaweibo_ios_sdk */,
 				188BF01616AD1C0F006A2602 /* DDMenu */,
@@ -522,6 +549,8 @@
 				188BF02616AD1FAC006A2602 /* BaseViewController.m */,
 				188BF02816AD2013006A2602 /* BaseNavigationController.h */,
 				188BF02916AD2013006A2602 /* BaseNavigationController.m */,
+				C81377BC17519CD700A85FA7 /* BaseTableView.h */,
+				C81377BD17519CD700A85FA7 /* BaseTableView.m */,
 			);
 			name = BaseView;
 			sourceTree = "<group>";
@@ -542,6 +571,8 @@
 				188BF0E116AD338D006A2602 /* RightViewController.h */,
 				188BF0E216AD338D006A2602 /* RightViewController.m */,
 				188BF0E316AD338D006A2602 /* RightViewController.xib */,
+				C864B7F91751A2B600E3DD1D /* WeiboTableView.h */,
+				C864B7FA1751A2B600E3DD1D /* WeiboTableView.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -707,6 +738,21 @@
 			path = SinaWeibo;
 			sourceTree = "<group>";
 		};
+		C81377C017519D4B00A85FA7 /* EGOTableViewPullRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				C81377C117519D4B00A85FA7 /* blackArrow.png */,
+				C81377C217519D4B00A85FA7 /* blackArrow@2x.png */,
+				C81377C317519D4B00A85FA7 /* blueArrow.png */,
+				C81377C417519D4B00A85FA7 /* blueArrow@2x.png */,
+				C81377C517519D4B00A85FA7 /* EGORefreshTableHeaderView.h */,
+				C81377C617519D4B00A85FA7 /* EGORefreshTableHeaderView.m */,
+				C81377C717519D4B00A85FA7 /* grayArrow.png */,
+				C81377C817519D4B00A85FA7 /* grayArrow@2x.png */,
+			);
+			path = EGOTableViewPullRefresh;
+			sourceTree = "<group>";
+		};
 		C8AC08A2174F7B7E009D49FF /* RegexKitLite */ = {
 			isa = PBXGroup;
 			children = (
@@ -862,6 +908,12 @@
 				18100C4216AEA3AA0093D3D4 /* timeline_new_status_background@2x.png in Resources */,
 				18100C4316AEA3AA0093D3D4 /* timeline_new_status_background.png in Resources */,
 				C8AC08A6174F7B7E009D49FF /* RegexKitLite.html in Resources */,
+				C81377C917519D4B00A85FA7 /* blackArrow.png in Resources */,
+				C81377CA17519D4B00A85FA7 /* blackArrow@2x.png in Resources */,
+				C81377CB17519D4B00A85FA7 /* blueArrow.png in Resources */,
+				C81377CC17519D4B00A85FA7 /* blueArrow@2x.png in Resources */,
+				C81377CE17519D4B00A85FA7 /* grayArrow.png in Resources */,
+				C81377CF17519D4B00A85FA7 /* grayArrow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -910,6 +962,10 @@
 				184F931C16AF807E009359AB /* WeiboCell.m in Sources */,
 				184F932016AF8095009359AB /* WeiboView.m in Sources */,
 				C8AC08A7174F7B7E009D49FF /* RegexKitLite.m in Sources */,
+				C83B33C8174FAD5800B61742 /* NSString+URLEncoding.m in Sources */,
+				C81377BE17519CD700A85FA7 /* BaseTableView.m in Sources */,
+				C81377CD17519D4B00A85FA7 /* EGORefreshTableHeaderView.m in Sources */,
+				C864B7FB1751A2B600E3DD1D /* WeiboTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
