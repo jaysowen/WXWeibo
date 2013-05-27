@@ -10,7 +10,14 @@
 #import "BaseViewController.h"
 #import "WeiboTableView.h"
 
-@interface HomeViewController : BaseViewController<SinaWeiboRequestDelegate>
+typedef enum {
+    GET_ALL_WEIBO,
+    GET_LATEST_WEIBO
+} WeiboFetchType;
+
+@interface HomeViewController : BaseViewController<SinaWeiboRequestDelegate, UITableviewEventDelegate>
 
 @property (retain, nonatomic) WeiboTableView *tableView;
+@property (nonatomic, copy) NSString *topWeiboId;
+@property (nonatomic, assign) WeiboFetchType weiboFetchType;
 @end

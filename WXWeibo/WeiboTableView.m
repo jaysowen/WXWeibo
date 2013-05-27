@@ -39,4 +39,17 @@
     return height;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self.eventDelegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
+        [self.eventDelegate tableView:self didSelectRowAtIndexPath:indexPath];
+    }
+}
+
 @end
+
+
+
+
+
+
+

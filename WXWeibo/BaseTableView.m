@@ -91,8 +91,12 @@
 	[self reloadTableViewDataSource];
     
     //停止加载，弹回下拉
-	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
-	
+//	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
+
+    // 判断协议方法是否被实现
+    if ([self.eventDelegate respondsToSelector:@selector(pullDown:)]) {
+        [self.eventDelegate pullDown:self];
+    }
 }
 
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
