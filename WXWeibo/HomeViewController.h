@@ -10,6 +10,7 @@
 #import "BaseViewController.h"
 #import "WeiboTableView.h"
 #import "ThemeImageView.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 typedef enum {
     GET_ALL_WEIBO,
@@ -22,4 +23,5 @@ typedef enum {
 @property (nonatomic, copy) NSString *topWeiboId;
 @property (nonatomic, assign) WeiboFetchType weiboFetchType;
 @property (nonatomic, retain) ThemeImageView *barView;
+@property (nonatomic, assign) SystemSoundID soundId;
 @end

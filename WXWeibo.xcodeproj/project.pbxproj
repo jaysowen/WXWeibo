@@ -150,6 +150,7 @@
 		C81377CD17519D4B00A85FA7 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C81377C617519D4B00A85FA7 /* EGORefreshTableHeaderView.m */; };
 		C81377CE17519D4B00A85FA7 /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C81377C717519D4B00A85FA7 /* grayArrow.png */; };
 		C81377CF17519D4B00A85FA7 /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C81377C817519D4B00A85FA7 /* grayArrow@2x.png */; };
+		C81A96B61754FC990016EBB9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C81A96B51754FC990016EBB9 /* AudioToolbox.framework */; };
 		C83B33C8174FAD5800B61742 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = C83B33C7174FAD5800B61742 /* NSString+URLEncoding.m */; };
 		C864B7FB1751A2B600E3DD1D /* WeiboTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C864B7FA1751A2B600E3DD1D /* WeiboTableView.m */; };
 		C8AC08A0174F7B4C009D49FF /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C8AC089F174F7B4C009D49FF /* libicucore.dylib */; };
@@ -348,6 +349,7 @@
 		C81377C617519D4B00A85FA7 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		C81377C717519D4B00A85FA7 /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
 		C81377C817519D4B00A85FA7 /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
+		C81A96B51754FC990016EBB9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C83B33C6174FAD5800B61742 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+URLEncoding.h"; path = "../NSString+URLEncoding.h"; sourceTree = "<group>"; };
 		C83B33C7174FAD5800B61742 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+URLEncoding.m"; path = "../NSString+URLEncoding.m"; sourceTree = "<group>"; };
 		C864B7F91751A2B600E3DD1D /* WeiboTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboTableView.h; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C81A96B61754FC990016EBB9 /* AudioToolbox.framework in Frameworks */,
 				C8AC08A0174F7B4C009D49FF /* libicucore.dylib in Frameworks */,
 				188BF02016AD1D5E006A2602 /* CoreText.framework in Frameworks */,
 				188BF01E16AD1CDC006A2602 /* QuartzCore.framework in Frameworks */,
@@ -413,6 +416,7 @@
 		188BEFC016AD1968006A2602 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C81A96B51754FC990016EBB9 /* AudioToolbox.framework */,
 				C8AC089F174F7B4C009D49FF /* libicucore.dylib */,
 				188BF01F16AD1D5E006A2602 /* CoreText.framework */,
 				188BF01D16AD1CDC006A2602 /* QuartzCore.framework */,

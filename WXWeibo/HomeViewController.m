@@ -11,6 +11,7 @@
 #import "WeiboCell.h"
 #import "WeiboView.h"
 #import "UIFactory.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface HomeViewController ()
 
@@ -23,6 +24,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"微博";
+        // 注册系统声音
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"msgcome" ofType:@"wav"];
+        NSURL *url = [NSURL fileURLWithPath:filePath];
+        AudioServicesCreateSystemSoundID((CFURLRef)url, &_soundId);
     }
     return self;
 }
@@ -164,11 +169,11 @@
     
     if (count > 0) {
         UILabel *label = (UILabel *)[self.view viewWithTag:2013];
-        label.text = [NSString stringWithFormat:@"%d跳新微博", count];
+        label.text = [NSString stringWithFormat:@"%d条新微博", count];
         [label sizeToFit];
         label.origin = CGPointMake((ScreenWidth-label.width)/2, (self.barView.height-label.height)/2);
         
-        // 下移动画停止一秒后开始上移动画
+        // 有新微博时出现一条消息提示。通过下移动画停止一秒后开始上移动画
         [UIView animateWithDuration:0.6 animations:^{
             self.barView.top = 5;
         } completion:^(BOOL finished) {
@@ -180,6 +185,9 @@
                 [UIView commitAnimations];
             }
         }];
+        
+        // 播放系统声音
+        AudioServicesPlaySystemSound(self.soundId);
     }
 }
 
