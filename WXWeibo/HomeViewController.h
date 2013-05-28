@@ -9,6 +9,7 @@
 
 #import "BaseViewController.h"
 #import "WeiboTableView.h"
+#import "ThemeImageView.h"
 
 typedef enum {
     GET_ALL_WEIBO,
@@ -20,4 +21,5 @@ typedef enum {
 @property (retain, nonatomic) WeiboTableView *tableView;
 @property (nonatomic, copy) NSString *topWeiboId;
 @property (nonatomic, assign) WeiboFetchType weiboFetchType;
+@property (nonatomic, retain) ThemeImageView *barView;
 @end

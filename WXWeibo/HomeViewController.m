@@ -10,6 +10,7 @@
 #import "WeiboModel.h"
 #import "WeiboCell.h"
 #import "WeiboView.h"
+#import "UIFactory.h"
 
 @interface HomeViewController ()
 
@@ -122,7 +123,8 @@
         [weibos addObject:weibo];
         [weibo release];
     }
-    NSLog(@"最新的微博条数: %d", weibos.count);
+    int updatedCount = weibos.count;
+    NSLog(@"最新的微博条数: %d", updatedCount);
     
     // 将已有的微博加入
     for(WeiboModel *model in self.tableView.data) {
@@ -138,6 +140,47 @@
     
     //刷新tableView
     [self.tableView reloadData];
+    [self showNewWeiboCount:updatedCount];
+}
+
+#pragma mark UI
+- (void)showNewWeiboCount:(int)count {
+    if (self.barView == nil) {
+        self.barView = [UIFactory createImageView:@"timeline_new_status_background.png"];
+        UIImage *image = [self.barView.image stretchableImageWithLeftCapWidth:5 topCapHeight:5];
+        self.barView.image = image;
+        self.barView.leftCapWidth = 5;
+        self.barView.topCapHeight = 5;
+        self.barView.frame = CGRectMake(5, -40, ScreenWidth-10, 40); // 隐藏视图
+        [self.view addSubview:self.barView];
+        
+        UILabel *label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        label.tag = 2013;
+        label.font = [UIFont systemFontOfSize:16];
+        label.textColor = [UIColor whiteColor];
+        label.backgroundColor = [UIColor clearColor];
+        [self.barView addSubview:label];
+    }
+    
+    if (count > 0) {
+        UILabel *label = (UILabel *)[self.view viewWithTag:2013];
+        label.text = [NSString stringWithFormat:@"%d跳新微博", count];
+        [label sizeToFit];
+        label.origin = CGPointMake((ScreenWidth-label.width)/2, (self.barView.height-label.height)/2);
+        
+        // 下移动画停止一秒后开始上移动画
+        [UIView animateWithDuration:0.6 animations:^{
+            self.barView.top = 5;
+        } completion:^(BOOL finished) {
+            if (finished) {
+                [UIView beginAnimations:nil context:nil];
+                [UIView setAnimationDelay:1];
+                [UIView setAnimationDuration:0.6];
+                self.barView.top = -40;
+                [UIView commitAnimations];
+            }
+        }];
+    }
 }
 
 #pragma mark - actions
