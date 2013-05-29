@@ -12,6 +12,7 @@
 #import "WeiboView.h"
 #import "UIFactory.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "MainViewController.h"
 
 @interface HomeViewController ()
 
@@ -84,7 +85,7 @@
 #pragma mark - SinaWeiboRequest delegate
 //网络加载失败
 - (void)request:(SinaWeiboRequest *)request didFailWithError:(NSError *)error {
-    NSLog(@"网络加载失败:%@",error);
+    NSLog(@"网络加载失败:%@", error);
 }
 
 //网络加载完成
@@ -189,6 +190,10 @@
         // 播放系统声音
         AudioServicesPlaySystemSound(self.soundId);
     }
+    
+    // 隐藏badgeView
+    MainViewController *mainVC = (MainViewController *)self.tabBarController;
+    [mainVC showBadge:NO];
 }
 
 #pragma mark - actions
@@ -231,6 +236,13 @@
 // 选中一个cell
 - (void)tableView:(BaseTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"选中cell");
+}
+
+- (void)refreshWeibo {
+    // 使UI显示下拉
+    [self.tableView refreshData];
+    // 取数据
+    [self pullDownData];
 }
 
 @end

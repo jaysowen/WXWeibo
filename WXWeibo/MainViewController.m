@@ -15,6 +15,7 @@
 #import "BaseNavigationController.h"
 #import "UIFactory.h"
 #import "ThemeButton.h"
+#import "AppDelegate.h"
 
 @interface MainViewController ()
 
@@ -37,6 +38,9 @@
     
     [self _initViewController];
     [self _initTabbarView];
+    
+    //每60秒请求未读数接口
+    [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(timeAction:) userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,6 +49,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark UI
 //初始化子控制器
 - (void)_initViewController {
     HomeViewController *home = [[[HomeViewController alloc] init] autorelease];
@@ -99,12 +104,19 @@
 #pragma mark - actions
 //tab 按钮的点击事件
 - (void)selectedTab:(UIButton *)button {
-    self.selectedIndex = button.tag;
-    
     float x = button.left + (button.width-_sliderView.width)/2;
     [UIView animateWithDuration:0.2 animations:^{
         _sliderView.left = x;
     }];
+    
+    // 判断是否为重复点击home按钮，如是，则刷新微博
+    if (button.tag == self.selectedIndex && (button.tag == 0)) {
+        UINavigationController *homeNav = self.viewControllers[0];
+        HomeViewController *homeCtrl = homeNav.viewControllers[0];
+        [homeCtrl refreshWeibo];
+    }
+    
+    self.selectedIndex = button.tag;
 }
 
 #pragma mark - SinaWeibo delegate
@@ -128,5 +140,80 @@
     NSLog(@"sinaweiboLogInDidCancel");    
 }
 
+#pragma mark - data
+- (void)timeAction:(NSTimer *)timer {
+    [self loadUnreadData];
+}
+
+- (void)loadUnreadData {
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    SinaWeibo *sinaWeibo = appDelegate.sinaweibo;
+    [sinaWeibo requestWithURL:@"remind/unread_count.json" params:nil httpMethod:@"GET" delegate:self];
+}
+
+- (void)request:(SinaWeiboRequest *)request didFailWithError:(NSError *)error {
+    NSLog(@"unread_count request faild: %@", error);
+}
+
+- (void)request:(SinaWeiboRequest *)request didFinishLoadingWithResult:(id)result {
+    [self refreshUnreadView:result];
+}
+
+- (void)refreshUnreadView:(NSDictionary *)result {
+    // 新微博未读数
+    NSNumber *status = [result objectForKey:@"status"];
+    if (_badgeView == nil) {
+        _badgeView = [UIFactory createImageView:@"main_badge.png"];
+        _badgeView.frame = CGRectMake(64-20, 5, 20, 20);
+        [_tabbarView addSubview:_badgeView];
+        
+        UILabel *badgeLabel = [[[UILabel alloc] initWithFrame:_badgeView.bounds] autorelease];
+        badgeLabel.textAlignment = NSTextAlignmentCenter;
+        badgeLabel.backgroundColor = [UIColor clearColor];
+        badgeLabel.font = [UIFont systemFontOfSize:13];
+        badgeLabel.textColor = [UIColor purpleColor];
+        badgeLabel.tag = 100;
+        [_tabbarView addSubview:badgeLabel];
+    }
+    
+    int n = status.intValue;
+    UILabel *badgeLabel = (UILabel *)[_tabbarView viewWithTag:100];
+    if (n > 0) {
+        if (n > 99) { // 最多只显示99
+            n = 99;
+        }
+        badgeLabel.text = [NSString stringWithFormat:@"%d", n];
+        _badgeView.hidden = NO;
+    } else {
+        _badgeView.hidden = YES;
+    }
+}
+
+- (void)showBadge:(BOOL)shouldShow {
+    _badgeView.hidden = !shouldShow;
+}
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

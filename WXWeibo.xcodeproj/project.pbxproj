@@ -151,6 +151,8 @@
 		C81377CE17519D4B00A85FA7 /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C81377C717519D4B00A85FA7 /* grayArrow.png */; };
 		C81377CF17519D4B00A85FA7 /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C81377C817519D4B00A85FA7 /* grayArrow@2x.png */; };
 		C81A96B61754FC990016EBB9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C81A96B51754FC990016EBB9 /* AudioToolbox.framework */; };
+		C81CD5671756258E001D058D /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = C81CD5641756258E001D058D /* 37x-Checkmark.png */; };
+		C81CD5681756258E001D058D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C81CD5661756258E001D058D /* MBProgressHUD.m */; };
 		C83B33C8174FAD5800B61742 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = C83B33C7174FAD5800B61742 /* NSString+URLEncoding.m */; };
 		C864B7FB1751A2B600E3DD1D /* WeiboTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C864B7FA1751A2B600E3DD1D /* WeiboTableView.m */; };
 		C8AC08A0174F7B4C009D49FF /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C8AC089F174F7B4C009D49FF /* libicucore.dylib */; };
@@ -350,6 +352,9 @@
 		C81377C717519D4B00A85FA7 /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
 		C81377C817519D4B00A85FA7 /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
 		C81A96B51754FC990016EBB9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		C81CD5641756258E001D058D /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
+		C81CD5651756258E001D058D /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		C81CD5661756258E001D058D /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		C83B33C6174FAD5800B61742 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+URLEncoding.h"; path = "../NSString+URLEncoding.h"; sourceTree = "<group>"; };
 		C83B33C7174FAD5800B61742 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+URLEncoding.m"; path = "../NSString+URLEncoding.m"; sourceTree = "<group>"; };
 		C864B7F91751A2B600E3DD1D /* WeiboTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboTableView.h; sourceTree = "<group>"; };
@@ -497,6 +502,7 @@
 		188BF00016AD1B7F006A2602 /* openSource */ = {
 			isa = PBXGroup;
 			children = (
+				C81CD5631756258E001D058D /* MBProgressHUD */,
 				C83B33C6174FAD5800B61742 /* NSString+URLEncoding.h */,
 				C83B33C7174FAD5800B61742 /* NSString+URLEncoding.m */,
 				C81377C017519D4B00A85FA7 /* EGOTableViewPullRefresh */,
@@ -757,6 +763,16 @@
 			path = EGOTableViewPullRefresh;
 			sourceTree = "<group>";
 		};
+		C81CD5631756258E001D058D /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				C81CD5641756258E001D058D /* 37x-Checkmark.png */,
+				C81CD5651756258E001D058D /* MBProgressHUD.h */,
+				C81CD5661756258E001D058D /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		C8AC08A2174F7B7E009D49FF /* RegexKitLite */ = {
 			isa = PBXGroup;
 			children = (
@@ -918,6 +934,7 @@
 				C81377CC17519D4B00A85FA7 /* blueArrow@2x.png in Resources */,
 				C81377CE17519D4B00A85FA7 /* grayArrow.png in Resources */,
 				C81377CF17519D4B00A85FA7 /* grayArrow@2x.png in Resources */,
+				C81CD5671756258E001D058D /* 37x-Checkmark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -970,6 +987,7 @@
 				C81377BE17519CD700A85FA7 /* BaseTableView.m in Sources */,
 				C81377CD17519D4B00A85FA7 /* EGORefreshTableHeaderView.m in Sources */,
 				C864B7FB1751A2B600E3DD1D /* WeiboTableView.m in Sources */,
+				C81CD5681756258E001D058D /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

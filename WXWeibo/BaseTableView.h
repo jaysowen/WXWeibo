@@ -30,4 +30,5 @@
 @property(nonatomic,assign) id<UITableviewEventDelegate> eventDelegate;
 
 - (void)doneLoadingTableViewData;
+- (void)refreshData;
 @end

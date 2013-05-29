@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "SinaWeibo.h"
 
-@interface MainViewController : UITabBarController<SinaWeiboDelegate> {
+@interface MainViewController : UITabBarController<SinaWeiboDelegate, SinaWeiboRequestDelegate> {
     UIView *_tabbarView;
     UIImageView *_sliderView;
+    UIImageView *_badgeView;
 }
 
+- (void)showBadge:(BOOL)shouldShow;
 @end
