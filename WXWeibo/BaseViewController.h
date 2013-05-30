@@ -8,11 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "SinaWeibo.h"
+#import "MBProgressHUD.h"
 
 @interface BaseViewController : UIViewController
 
 @property(nonatomic,assign)BOOL isBackButton;
+@property(nonatomic,retain)MBProgressHUD *hud;
 
 - (SinaWeibo *)sinaweibo;
+- (void)showHUD:(NSString *)title showDim:(BOOL)isDim;
+- (void)showHUDComplete:(NSString *)title;
+- (void)hideHUD;
 
 @end

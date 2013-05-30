@@ -13,6 +13,7 @@
 #import "UIFactory.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "MainViewController.h"
+#import "DetailViewController.h"
 
 @interface HomeViewController ()
 
@@ -74,6 +75,9 @@
 
 #pragma mark - load Data
 - (void)loadWeiboData {
+    // 显示Loading画面
+    [super showHUD:@"正在加载..." showDim:NO];
+    
     self.weiboFetchType = GET_ALL_WEIBO;
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:@"20" forKey:@"count"];
     [self.sinaweibo requestWithURL:@"statuses/home_timeline.json"
@@ -86,6 +90,7 @@
 //网络加载失败
 - (void)request:(SinaWeiboRequest *)request didFailWithError:(NSError *)error {
     NSLog(@"网络加载失败:%@", error);
+    [super hideHUD]; // 隐藏Loading画面
 }
 
 //网络加载完成
@@ -97,6 +102,8 @@
     }
     
    [self.tableView performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.0];
+    //[super hideHUD];
+    [super performSelector:@selector(showHUDComplete:) withObject:@"加载成功" afterDelay:0.5];
 }
 
 - (void)didFinishLoadingAllWeiboWithResult:(id)result {
@@ -110,6 +117,7 @@
     }
     
     self.tableView.data = weibos;
+    self.weibos = weibos;
     
     if (weibos.count > 0) {
         WeiboModel *weibo = weibos[0];
@@ -138,6 +146,7 @@
     }
     
     self.tableView.data = weibos;
+    self.weibos = weibos;
     
     if (weibos.count > 0) {
         WeiboModel *weibo = weibos[0];
@@ -236,6 +245,11 @@
 // 选中一个cell
 - (void)tableView:(BaseTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"选中cell");
+    
+    WeiboModel *weibo = [self.weibos objectAtIndex:indexPath.row];
+    DetailViewController *detailVC = [[[DetailViewController alloc] init] autorelease];
+    detailVC.weiboModel = weibo;
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 - (void)refreshWeibo {

@@ -89,6 +89,7 @@
         
 //        ThemeButton *button = [[ThemeButton alloc] initWithImage:backImage highlighted:heightImage];
         UIButton *button = [UIFactory createButton:backImage highlighted:heightImage];
+        button.showsTouchWhenHighlighted = YES; // 按钮点击高亮显示
         button.frame = CGRectMake((64-30)/2+(i*64), (49-30)/2, 30, 30);
         button.tag = i;
         [button addTarget:self action:@selector(selectedTab:) forControlEvents:UIControlEventTouchUpInside];

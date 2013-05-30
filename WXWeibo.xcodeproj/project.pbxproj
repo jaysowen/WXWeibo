@@ -155,6 +155,8 @@
 		C81CD5681756258E001D058D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C81CD5661756258E001D058D /* MBProgressHUD.m */; };
 		C83B33C8174FAD5800B61742 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = C83B33C7174FAD5800B61742 /* NSString+URLEncoding.m */; };
 		C864B7FB1751A2B600E3DD1D /* WeiboTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C864B7FA1751A2B600E3DD1D /* WeiboTableView.m */; };
+		C899D09317577D2000900831 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C899D09117577D2000900831 /* DetailViewController.m */; };
+		C899D09417577D2000900831 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C899D09217577D2000900831 /* DetailViewController.xib */; };
 		C8AC08A0174F7B4C009D49FF /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C8AC089F174F7B4C009D49FF /* libicucore.dylib */; };
 		C8AC08A6174F7B7E009D49FF /* RegexKitLite.html in Resources */ = {isa = PBXBuildFile; fileRef = C8AC08A4174F7B7E009D49FF /* RegexKitLite.html */; };
 		C8AC08A7174F7B7E009D49FF /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = C8AC08A5174F7B7E009D49FF /* RegexKitLite.m */; };
@@ -359,6 +361,9 @@
 		C83B33C7174FAD5800B61742 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+URLEncoding.m"; path = "../NSString+URLEncoding.m"; sourceTree = "<group>"; };
 		C864B7F91751A2B600E3DD1D /* WeiboTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboTableView.h; sourceTree = "<group>"; };
 		C864B7FA1751A2B600E3DD1D /* WeiboTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboTableView.m; sourceTree = "<group>"; };
+		C899D09017577D2000900831 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		C899D09117577D2000900831 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		C899D09217577D2000900831 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		C8AC089F174F7B4C009D49FF /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		C8AC08A3174F7B7E009D49FF /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		C8AC08A4174F7B7E009D49FF /* RegexKitLite.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = RegexKitLite.html; sourceTree = "<group>"; };
@@ -583,6 +588,9 @@
 				188BF0E316AD338D006A2602 /* RightViewController.xib */,
 				C864B7F91751A2B600E3DD1D /* WeiboTableView.h */,
 				C864B7FA1751A2B600E3DD1D /* WeiboTableView.m */,
+				C899D09017577D2000900831 /* DetailViewController.h */,
+				C899D09117577D2000900831 /* DetailViewController.m */,
+				C899D09217577D2000900831 /* DetailViewController.xib */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -935,6 +943,7 @@
 				C81377CE17519D4B00A85FA7 /* grayArrow.png in Resources */,
 				C81377CF17519D4B00A85FA7 /* grayArrow@2x.png in Resources */,
 				C81CD5671756258E001D058D /* 37x-Checkmark.png in Resources */,
+				C899D09417577D2000900831 /* DetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -988,6 +997,7 @@
 				C81377CD17519D4B00A85FA7 /* EGORefreshTableHeaderView.m in Sources */,
 				C864B7FB1751A2B600E3DD1D /* WeiboTableView.m in Sources */,
 				C81CD5681756258E001D058D /* MBProgressHUD.m in Sources */,
+				C899D09317577D2000900831 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

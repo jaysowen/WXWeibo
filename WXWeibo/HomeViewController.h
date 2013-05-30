@@ -24,6 +24,7 @@ typedef enum {
 @property (nonatomic, assign) WeiboFetchType weiboFetchType;
 @property (nonatomic, retain) ThemeImageView *barView;
 @property (nonatomic, assign) SystemSoundID soundId;
+@property (nonatomic, retain) NSArray *weibos;
 
 - (void)refreshWeibo;
 @end
