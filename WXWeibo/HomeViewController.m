@@ -73,6 +73,20 @@
                           delegate:self];
 }
 
+//上拉加载更多微博数据
+- (void)pullUpData {
+    if (self.lastWeiboId.length<1) {
+        NSLog(@"微博id为空");
+        return;
+    }
+    self.weiboFetchType = GET_MORE_WEIBO;
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"10", @"count", self.topWeiboId, @"max_id", nil];
+    [self.sinaweibo requestWithURL:@"statuses/home_timeline.json"
+                            params:params
+                        httpMethod:@"GET"
+                          delegate:self];
+}
+
 #pragma mark - load Data
 - (void)loadWeiboData {
     // 显示Loading画面
@@ -99,6 +113,8 @@
         [self didFinishLoadingAllWeiboWithResult:result];
     } else if (self.weiboFetchType == GET_LATEST_WEIBO) {
         [self didFinishLoadingLatestWeiboWithResult:result];
+    } else if (self.weiboFetchType == GET_MORE_WEIBO) {
+        [self didFinishLoadingMoreWeiboWithResult:result];
     }
     
    [self.tableView performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.0];
@@ -122,6 +138,8 @@
     if (weibos.count > 0) {
         WeiboModel *weibo = weibos[0];
         self.topWeiboId = weibo.weiboId.stringValue;
+        WeiboModel *lastWeibo = [weibos lastObject];
+        self.lastWeiboId = lastWeibo.weiboId.stringValue;
     }
     
     //刷新tableView
@@ -151,11 +169,47 @@
     if (weibos.count > 0) {
         WeiboModel *weibo = weibos[0];
         self.topWeiboId = weibo.weiboId.stringValue;
+        WeiboModel *lastWeibo = [weibos lastObject];
+        self.lastWeiboId = lastWeibo.weiboId.stringValue;
     }
     
     //刷新tableView
     [self.tableView reloadData];
     [self showNewWeiboCount:updatedCount];
+}
+
+- (void)didFinishLoadingMoreWeiboWithResult:(id)result {
+    NSLog(@"%@", result);
+    NSArray *statues = [result objectForKey:@"statuses"];
+    NSMutableArray *weibos = [NSMutableArray arrayWithCapacity:(statues.count+self.tableView.data.count)];
+    
+    // 将已有的微博加入
+    for(WeiboModel *model in self.tableView.data) {
+        [weibos addObject:model];
+    }
+    
+    // 加入更多的微博
+    for (NSDictionary *statuesDic in statues) {
+        WeiboModel *weibo = [[WeiboModel alloc] initWithDataDic:statuesDic];
+        [weibos addObject:weibo];
+        [weibo release];
+    }
+    
+    int updatedCount = statues.count;
+    NSLog(@"更多的微博条数: %d", updatedCount);
+    
+    self.tableView.data = weibos;
+    self.weibos = weibos;
+    
+    if (weibos.count > 0) {
+        WeiboModel *weibo = weibos[0];
+        self.topWeiboId = weibo.weiboId.stringValue;
+        WeiboModel *lastWeibo = [weibos lastObject];
+        self.lastWeiboId = lastWeibo.weiboId.stringValue;
+    }
+    
+    //刷新tableView
+    [self.tableView reloadData];
 }
 
 #pragma mark UI
@@ -240,6 +294,8 @@
 
 //上拉
 - (void)pullUp:(BaseTableView *)tableView {
+//    NSLog(@"上拉");
+    [self pullUpData];
 }
 
 // 选中一个cell

@@ -160,6 +160,10 @@
 		C8AC08A0174F7B4C009D49FF /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C8AC089F174F7B4C009D49FF /* libicucore.dylib */; };
 		C8AC08A6174F7B7E009D49FF /* RegexKitLite.html in Resources */ = {isa = PBXBuildFile; fileRef = C8AC08A4174F7B7E009D49FF /* RegexKitLite.html */; };
 		C8AC08A7174F7B7E009D49FF /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = C8AC08A5174F7B7E009D49FF /* RegexKitLite.m */; };
+		C8C674631759D4A200DC6302 /* CommentTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8C674621759D4A200DC6302 /* CommentTableView.m */; };
+		C8C674661759D55E00DC6302 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8C674651759D55E00DC6302 /* CommentCell.xib */; };
+		C8C674691759D78300DC6302 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C8C674681759D78300DC6302 /* CommentCell.m */; };
+		C8C6746C1759DC9000DC6302 /* CommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C8C6746B1759DC9000DC6302 /* CommentModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -368,6 +372,13 @@
 		C8AC08A3174F7B7E009D49FF /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		C8AC08A4174F7B7E009D49FF /* RegexKitLite.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = RegexKitLite.html; sourceTree = "<group>"; };
 		C8AC08A5174F7B7E009D49FF /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		C8C674611759D4A200DC6302 /* CommentTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableView.h; sourceTree = "<group>"; };
+		C8C674621759D4A200DC6302 /* CommentTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTableView.m; sourceTree = "<group>"; };
+		C8C674651759D55E00DC6302 /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
+		C8C674671759D78300DC6302 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
+		C8C674681759D78300DC6302 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
+		C8C6746A1759DC9000DC6302 /* CommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentModel.h; sourceTree = "<group>"; };
+		C8C6746B1759DC9000DC6302 /* CommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -500,6 +511,8 @@
 				18100C3616AE8D240093D3D4 /* WeiboModel.m */,
 				18100C3816AE8F850093D3D4 /* UserModel.h */,
 				18100C3916AE8F850093D3D4 /* UserModel.m */,
+				C8C6746A1759DC9000DC6302 /* CommentModel.h */,
+				C8C6746B1759DC9000DC6302 /* CommentModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -591,6 +604,11 @@
 				C899D09017577D2000900831 /* DetailViewController.h */,
 				C899D09117577D2000900831 /* DetailViewController.m */,
 				C899D09217577D2000900831 /* DetailViewController.xib */,
+				C8C674611759D4A200DC6302 /* CommentTableView.h */,
+				C8C674621759D4A200DC6302 /* CommentTableView.m */,
+				C8C674651759D55E00DC6302 /* CommentCell.xib */,
+				C8C674671759D78300DC6302 /* CommentCell.h */,
+				C8C674681759D78300DC6302 /* CommentCell.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -944,6 +962,7 @@
 				C81377CF17519D4B00A85FA7 /* grayArrow@2x.png in Resources */,
 				C81CD5671756258E001D058D /* 37x-Checkmark.png in Resources */,
 				C899D09417577D2000900831 /* DetailViewController.xib in Resources */,
+				C8C674661759D55E00DC6302 /* CommentCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -998,6 +1017,9 @@
 				C864B7FB1751A2B600E3DD1D /* WeiboTableView.m in Sources */,
 				C81CD5681756258E001D058D /* MBProgressHUD.m in Sources */,
 				C899D09317577D2000900831 /* DetailViewController.m in Sources */,
+				C8C674631759D4A200DC6302 /* CommentTableView.m in Sources */,
+				C8C674691759D78300DC6302 /* CommentCell.m in Sources */,
+				C8C6746C1759DC9000DC6302 /* CommentModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

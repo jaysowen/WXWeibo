@@ -11,8 +11,9 @@
 #import "WeiboModel.h"
 #import "UIImageView+WebCache.h"
 #import "ThemeImageView.h"
-#import "RegexKitLite.h"
+#import "UIUtils.h"
 #import "NSString+URLEncoding.h"
+
 
 #define LIST_FONT   14.0f           //列表中文本字体
 #define LIST_REPOST_FONT  13.0f;    //列表中转发的文本字体
@@ -74,6 +75,7 @@
     if (_repostView == nil) {
         _repostView = [[WeiboView alloc] initWithFrame:CGRectZero];
         _repostView.isRepost = YES;
+        _repostView.isDetail = self.isDetail;
         [self addSubview:_repostView];        
     }
     
@@ -92,40 +94,8 @@
         [_parsedText appendFormat:@"<a href='user://%@'>%@</a>: ", [nickName URLEncodedString], nickName];
     }
     
-    /*
-     * 微博中有三种文本需要超链接：
-     * 1. @麻子
-     * 2. #话题#
-     * 3. http://www.baidu.com
-     */
-    NSString *regex = @"(@\\w+)|(#\\w+#)|(http(s)?://(\\w|.)+)";
-    //NSString *regex = @"(@\\w+)|(#\\w+#)|(http(s)?://([a-zA-Z0-9._-]|/|\\?|=|&)+)";
-    NSArray *array = [text componentsMatchedByRegex:regex];
-    for (NSString *str in array) {
-        /*
-         * 集中文本的超链接跳转：
-         * @麻子:     <a href='user://@用户'></a>
-         * #话题#:    <a href='topic://#话题#'></a>
-         * http://www.baidu.com: <a href='http://www.baidu.com'></a>
-         */
-        
-        NSString *replacement;
-        if ([str hasPrefix:@"@"]) {
-             // 中文需要编码后才能被识别为url
-            replacement = [NSString stringWithFormat:@"<a href='user://%@'>%@</a>", [str URLEncodedString], str];
-        } else if ([str hasPrefix:@"#"]) {
-             // 中文需要编码后才能被识别为url
-            replacement = [NSString stringWithFormat:@"<a href='topic://%@'>%@</a>", [str URLEncodedString], str];
-        } else if ([str hasPrefix:@"http://"]) {
-            replacement = [NSString stringWithFormat:@"<a href='%@'>%@</a>", str, str];
-        } else {
-            replacement = nil;
-        }
-       
-        //text = [text stringByReplacingOccurrencesOfRegex:str withString:replacement];
-        text = [text stringByReplacingOccurrencesOfString:str withString:replacement];
-    }
-    
+    // 解析替换超链接
+    text = [UIUtils parseLink:text];
     [_parsedText appendString:text];
 }
 

@@ -9,13 +9,14 @@
 #import "BaseViewController.h"
 #import "WeiboModel.h"
 #import "WeiboView.h"
+#import "CommentTableView.h"
 
-@interface DetailViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface DetailViewController : BaseViewController <SinaWeiboRequestDelegate> {
     WeiboView *_weiboView;
 }
 
 @property(nonatomic,retain)WeiboModel *weiboModel;
-@property (retain, nonatomic) IBOutlet UITableView *tableView;
+@property (retain, nonatomic) IBOutlet CommentTableView *tableView;
 @property (retain, nonatomic) IBOutlet UIImageView *userImageView;
 @property (retain, nonatomic) IBOutlet UILabel *nickLabel;
 @property (retain, nonatomic) IBOutlet UIView *userBarView;

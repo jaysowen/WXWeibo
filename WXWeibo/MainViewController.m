@@ -62,6 +62,7 @@
     NSMutableArray *viewControllers = [NSMutableArray arrayWithCapacity:5];
     for (UIViewController *viewController in views) {
         BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:viewController];
+        nav.delegate = self;
         [viewControllers addObject:nav];
         [nav release];
     }
@@ -174,7 +175,7 @@
         badgeLabel.font = [UIFont systemFontOfSize:13];
         badgeLabel.textColor = [UIColor purpleColor];
         badgeLabel.tag = 100;
-        [_tabbarView addSubview:badgeLabel];
+        [_badgeView addSubview:badgeLabel];
     }
     
     int n = status.intValue;
@@ -192,6 +193,40 @@
 
 - (void)showBadge:(BOOL)shouldShow {
     _badgeView.hidden = !shouldShow;
+}
+
+- (void)showTabbar:(BOOL)shouldShow {
+    [UIView animateWithDuration:0.35 animations:^{
+        if (shouldShow) {
+            _tabbarView.left = 0;
+        } else {
+            _tabbarView.left = -ScreenWidth;
+        }
+    }];
+    
+    [self _resizeView:shouldShow];
+}
+
+- (void)_resizeView:(BOOL)shouldShowTabbar {
+    for (UIView *subView in self.view.subviews) {
+        //NSLog(@"%@", subView);
+        if ([subView isKindOfClass:NSClassFromString(@"UITransitionView")]) {
+            if (shouldShowTabbar) {
+                subView.height = ScreenHeight - 49 - 20;
+            } else {
+                // 减去的20是为平衡DDMenu
+                subView.height = ScreenHeight - 20;
+            }
+        }
+    }
+}
+
+# pragma mark - UINavigationControllerDelegate
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    // 导航控制器的子控制器的个数
+    int count = navigationController.viewControllers.count;
+    BOOL shouldShowTabbar = (count != 2);
+    [self showTabbar:shouldShowTabbar];
 }
 
 @end

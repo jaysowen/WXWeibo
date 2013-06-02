@@ -23,6 +23,7 @@
 @interface BaseTableView : UITableView <EGORefreshTableHeaderDelegate, UITableViewDataSource, UITableViewDelegate> {
     EGORefreshTableHeaderView *_refreshHeaderView;
     BOOL _reloading;
+    UIButton *_moreButton;
 }
 
 @property(nonatomic,assign, setter = setRefreshNeeded:) BOOL isRefreshNeeded;   //是否需要下拉

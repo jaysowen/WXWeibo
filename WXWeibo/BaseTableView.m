@@ -30,6 +30,46 @@
     self.dataSource = self;
     self.delegate= self;
     self.isRefreshNeeded = YES;
+    
+    _moreButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+    _moreButton.backgroundColor = [UIColor clearColor];
+    _moreButton.frame = CGRectMake(0, 0, ScreenWidth, 40);
+    _moreButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    [_moreButton setTitle:@"上拉加载更多..." forState:UIControlStateNormal];
+    [_moreButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_moreButton addTarget:self action:@selector(loadMoreAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityView.tag = 2013;
+    activityView.frame = CGRectMake(100, 10, 20, 20);
+    [activityView stopAnimating];
+    [_moreButton addSubview:activityView];
+    
+    self.tableFooterView = _moreButton;
+}
+
+- (void)_startLoadMore {
+    [_moreButton setTitle:@"正在加载..." forState:UIControlStateNormal];
+    // 正在加载时，应将按钮禁用
+    _moreButton.enabled = NO;
+    UIActivityIndicatorView *activityView = (UIActivityIndicatorView *)[_moreButton viewWithTag:2013];
+    [activityView startAnimating];
+}
+
+- (void)_stopLoadMore {
+    [_moreButton setTitle:@"上拉加载更多..." forState:UIControlStateNormal];
+    UIActivityIndicatorView *activityView = (UIActivityIndicatorView *)[_moreButton viewWithTag:2013];
+    [activityView stopAnimating];
+    // 结束加载时，应将按钮可用
+    _moreButton.enabled = YES;
+}
+
+#pragma mark - action
+- (void)loadMoreAction {
+    if ([self.eventDelegate respondsToSelector:@selector(pullUp:)]) {
+        [self.eventDelegate pullUp:self];
+        [self _startLoadMore];
+    }
 }
 
 - (void)setRefreshNeeded:(BOOL)isRefreshNeeded {
@@ -56,6 +96,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];;
     return cell;
+}
+
+- (void)reloadData {
+    [super reloadData];
+    [self _stopLoadMore];
 }
 
 #pragma mark -

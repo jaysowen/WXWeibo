@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 #import "UIImageView+WebCache.h"
 #import "WeiboModel.h"
+#import "CommentModel.h"
 
 @interface DetailViewController ()
 
@@ -30,6 +31,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self _initView];
+    [self loadData];
 }
 
 - (void)_initView {
@@ -57,12 +59,13 @@
     self.tableView.tableHeaderView = tableHeaderView;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return nil;
+- (void)loadData {
+    NSString *weiboId = _weiboModel.weiboId.stringValue;
+    if (weiboId.length < 1) {
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:weiboId forKey:@"id"];
+    [self.sinaweibo requestWithURL:@"comments/show.json" params:params httpMethod:@"GET" delegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,4 +81,34 @@
     [_userBarView release];
     [super dealloc];
 }
+
+#pragma mark 
+- (void)request:(SinaWeiboRequest *)request didFailWithError:(NSError *)error {
+    NSLog(@"%@", error);
+}
+
+- (void)request:(SinaWeiboRequest *)request didFinishLoadingWithResult:(id)result {
+    NSArray *array = [((NSDictionary *)result) objectForKey:@"comments"];
+    NSMutableArray *comments = [NSMutableArray arrayWithCapacity:array.count];
+    for (NSDictionary *dict in array) {
+        CommentModel *commentModel = [[[CommentModel alloc] initWithDataDic:dict] autorelease];
+        [comments addObject:commentModel];
+    }
+    // 将整个结果字典传过去
+    self.tableView.commentDic = result;
+    // 将评论数组传过去
+    self.tableView.data = comments;
+    [self.tableView reloadData];
+}
 @end
+
+
+
+
+
+
+
+
+
+
+
