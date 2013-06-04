@@ -29,6 +29,8 @@
 @property(nonatomic,assign, setter = setRefreshNeeded:) BOOL isRefreshNeeded;   //是否需要下拉
 @property(nonatomic,retain) NSArray *data;           //为tableview提供数据
 @property(nonatomic,assign) id<UITableviewEventDelegate> eventDelegate;
+@property(nonatomic,assign) BOOL isMore;    // 是否还有更多微博可加载
+@property(nonatomic,assign) int moreDataCount;  // 更多的数据条数
 
 - (void)doneLoadingTableViewData;
 - (void)refreshData;

@@ -80,7 +80,7 @@
         return;
     }
     self.weiboFetchType = GET_MORE_WEIBO;
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"10", @"count", self.topWeiboId, @"max_id", nil];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"21", @"count", self.lastWeiboId, @"max_id", nil];
     [self.sinaweibo requestWithURL:@"statuses/home_timeline.json"
                             params:params
                         httpMethod:@"GET"
@@ -134,6 +134,7 @@
     
     self.tableView.data = weibos;
     self.weibos = weibos;
+    self.tableView.moreDataCount = weibos.count;
     
     if (weibos.count > 0) {
         WeiboModel *weibo = weibos[0];
@@ -156,6 +157,7 @@
         [weibo release];
     }
     int updatedCount = weibos.count;
+    //self.tableView.moreDataCount = updatedCount;
     NSLog(@"最新的微博条数: %d", updatedCount);
     
     // 将已有的微博加入
@@ -188,15 +190,17 @@
         [weibos addObject:model];
     }
     
-    // 加入更多的微博
-    for (NSDictionary *statuesDic in statues) {
+    // 加入更多的微博，跳过第1条，因为与之前的最后一条重复
+    for (int i=1; i<statues.count; i++) {
+        NSDictionary *statuesDic = statues[i];
         WeiboModel *weibo = [[WeiboModel alloc] initWithDataDic:statuesDic];
         [weibos addObject:weibo];
         [weibo release];
     }
     
     int updatedCount = statues.count;
-    NSLog(@"更多的微博条数: %d", updatedCount);
+    self.tableView.moreDataCount = updatedCount-1;
+    NSLog(@"更多的微博条数: %d", (updatedCount-1));
     
     self.tableView.data = weibos;
     self.weibos = weibos;

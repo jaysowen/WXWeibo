@@ -57,6 +57,7 @@
     tableHeaderView.height += (h+10);
     
     self.tableView.tableHeaderView = tableHeaderView;
+    self.tableView.eventDelegate = self;
 }
 
 - (void)loadData {
@@ -64,7 +65,8 @@
     if (weiboId.length < 1) {
         return;
     }
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:weiboId forKey:@"id"];
+    self.commentFetchType = GET_ALL_COMMENTS;
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:weiboId, @"id", @"20", @"count", nil];
     [self.sinaweibo requestWithURL:@"comments/show.json" params:params httpMethod:@"GET" delegate:self];
 }
 
@@ -82,24 +84,86 @@
     [super dealloc];
 }
 
+//上拉加载更多微博数据
+- (void)pullUpData {
+    NSString *weiboId = _weiboModel.weiboId.stringValue;
+    NSString *lastCommentId = self.lastCommentId;
+    if (weiboId.length < 1 || lastCommentId.length < 1) {
+        return;
+    }
+    self.commentFetchType = GET_MORE_COMMENTS;
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:weiboId, @"id", lastCommentId, @"max_id", @"21", @"count", nil];
+    [self.sinaweibo requestWithURL:@"comments/show.json" params:params httpMethod:@"GET" delegate:self];
+}
+
 #pragma mark 
 - (void)request:(SinaWeiboRequest *)request didFailWithError:(NSError *)error {
     NSLog(@"%@", error);
 }
 
 - (void)request:(SinaWeiboRequest *)request didFinishLoadingWithResult:(id)result {
+    if (self.commentFetchType == GET_ALL_COMMENTS) {
+        [self request:request didFinishLoadingCurrentWithResult:result];
+    } else if (self.commentFetchType == GET_MORE_COMMENTS) {
+        [self request:request didFinishLoadingMoreWithResult:result];
+    }
+}
+
+- (void)request:(SinaWeiboRequest *)request didFinishLoadingCurrentWithResult:(id)result {
     NSArray *array = [((NSDictionary *)result) objectForKey:@"comments"];
     NSMutableArray *comments = [NSMutableArray arrayWithCapacity:array.count];
     for (NSDictionary *dict in array) {
         CommentModel *commentModel = [[[CommentModel alloc] initWithDataDic:dict] autorelease];
         [comments addObject:commentModel];
     }
+    
+    // 获得最后一个评论的id
+    CommentModel *lastComment = [comments lastObject];
+    self.lastCommentId = lastComment.idstr;
+    self.tableView.moreDataCount = comments.count;
+    
     // 将整个结果字典传过去
     self.tableView.commentDic = result;
     // 将评论数组传过去
     self.tableView.data = comments;
     [self.tableView reloadData];
 }
+
+- (void)request:(SinaWeiboRequest *)request didFinishLoadingMoreWithResult:(id)result {
+    NSArray *array = [((NSDictionary *)result) objectForKey:@"comments"];
+    NSMutableArray *comments = [NSMutableArray arrayWithCapacity:array.count+self.tableView.data.count];
+    
+    // 将已有的数据加至数组
+    for(CommentModel *comment in self.tableView.data) {
+        [comments addObject:comment];
+    }
+    
+    // 将新数据加至数组，忽略第1条重复的
+    for (int i=1; i<array.count; i++) {
+        NSDictionary *dict = array[i];
+        CommentModel *commentModel = [[[CommentModel alloc] initWithDataDic:dict] autorelease];
+        [comments addObject:commentModel];
+    }
+    
+    // 将整个结果字典传过去
+    self.tableView.commentDic = result;
+    // 将评论数组传过去
+    self.tableView.data = comments;
+    self.tableView.moreDataCount = array.count-1;
+    
+    // 获得最后一个评论的id
+    CommentModel *lastComment = [comments lastObject];
+    self.lastCommentId = lastComment.idstr;
+    
+    [self.tableView reloadData];
+}
+
+
+#pragma mark - UITableviewEventDelegate
+- (void)pullUp:(BaseTableView *)tableView {
+    [self pullUpData];
+}
+
 @end
 
 

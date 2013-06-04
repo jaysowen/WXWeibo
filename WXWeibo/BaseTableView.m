@@ -57,11 +57,17 @@
 }
 
 - (void)_stopLoadMore {
-    [_moreButton setTitle:@"上拉加载更多..." forState:UIControlStateNormal];
-    UIActivityIndicatorView *activityView = (UIActivityIndicatorView *)[_moreButton viewWithTag:2013];
-    [activityView stopAnimating];
-    // 结束加载时，应将按钮可用
-    _moreButton.enabled = YES;
+    NSLog(@"moreDataCount: %d", self.moreDataCount);
+    if (self.moreDataCount >= 20) {
+        [_moreButton setTitle:@"上拉加载更多..." forState:UIControlStateNormal];
+        UIActivityIndicatorView *activityView = (UIActivityIndicatorView *)[_moreButton viewWithTag:2013];
+        [activityView stopAnimating];
+        _moreButton.hidden = NO;
+        // 结束加载时，应将按钮可用
+        _moreButton.enabled = YES;
+    } else { // 如果没有数据可供加载，则隐藏按钮
+        _moreButton.hidden = YES;
+    }
 }
 
 #pragma mark - action
@@ -118,17 +124,36 @@
 
 #pragma mark -
 #pragma mark UIScrollViewDelegate Methods
-
+// 当滑动时，实时调用此方法
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 	
 	[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
     
 }
 
+// 手指停止拖拽时调用
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
 	
 	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
 	
+    /*
+     * 滑动加载
+     */
+    float offset = scrollView.contentOffset.y;
+    float contentHeight = scrollView.contentSize.height;
+    
+//    NSLog(@"偏移量y: %f", offset);
+//    NSLog(@"content高度: %f", contentHeight);
+    
+    // 当offset偏移量滑到底部时，差值是scrollView的高度
+    float sub = contentHeight - offset;
+    if (scrollView.height - sub > 30) {
+        [self _startLoadMore];
+        
+        if ([self.eventDelegate respondsToSelector:@selector(pullUp:)]) {
+            [self.eventDelegate pullUp:self];
+        }
+    }
 }
 
 

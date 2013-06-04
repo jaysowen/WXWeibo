@@ -11,7 +11,12 @@
 #import "WeiboView.h"
 #import "CommentTableView.h"
 
-@interface DetailViewController : BaseViewController <SinaWeiboRequestDelegate> {
+typedef enum {
+    GET_ALL_COMMENTS,
+    GET_MORE_COMMENTS
+} FetchType;
+
+@interface DetailViewController : BaseViewController <SinaWeiboRequestDelegate, UITableviewEventDelegate> {
     WeiboView *_weiboView;
 }
 
@@ -20,5 +25,7 @@
 @property (retain, nonatomic) IBOutlet UIImageView *userImageView;
 @property (retain, nonatomic) IBOutlet UILabel *nickLabel;
 @property (retain, nonatomic) IBOutlet UIView *userBarView;
+@property (assign, nonatomic) FetchType commentFetchType;
+@property (copy, nonatomic) NSString *lastCommentId;
 
 @end
