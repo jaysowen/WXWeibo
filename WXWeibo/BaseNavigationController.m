@@ -34,6 +34,19 @@
     [super viewDidLoad];
     
     [self loadThemeImage];
+    
+    UISwipeGestureRecognizer *swipeGr = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeAction:)] autorelease];
+    swipeGr.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:swipeGr];
+}
+
+- (void)swipeAction:(UISwipeGestureRecognizer *)swipeGr {
+    // 返回
+    if (self.viewControllers.count > 1) {
+        if (swipeGr.direction == UISwipeGestureRecognizerDirectionRight) {
+            [self popViewControllerAnimated:YES];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning

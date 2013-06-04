@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
-#import "DDMenuController.h"
 #import "LeftViewController.h"
 #import "RightViewController.h"
 #import "SinaWeibo.h"
@@ -56,15 +55,14 @@
     RightViewController *rightCtrl = [[RightViewController alloc] init];
     
     //初始化左右菜单
-    DDMenuController *menuCtrl = [[DDMenuController alloc] initWithRootViewController:_mainCtrl];
-    menuCtrl.leftViewController = leftCtrl;
-    menuCtrl.rightViewController = rightCtrl;
+    _menuCtrl = [[DDMenuController alloc] initWithRootViewController:_mainCtrl];
+    _menuCtrl.leftViewController = leftCtrl;
+    _menuCtrl.rightViewController = rightCtrl;
 
     //初始化微博对象
     [self _initSinaWeibo];
     
-    self.window.rootViewController = menuCtrl;
-    [menuCtrl release];
+    self.window.rootViewController = _menuCtrl;
     
     return YES;
 }

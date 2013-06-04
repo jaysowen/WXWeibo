@@ -91,4 +91,9 @@
     [self.hud hide:YES afterDelay:1]; // 让加载完成的图片显示一秒钟
 }
 
+- (AppDelegate *)appDelegate {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    return appDelegate;
+}
+
 @end

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SinaWeibo.h"
 #import "MBProgressHUD.h"
+#import "AppDelegate.h"
 
 @interface BaseViewController : UIViewController
 
@@ -16,6 +17,7 @@
 @property(nonatomic,retain)MBProgressHUD *hud;
 
 - (SinaWeibo *)sinaweibo;
+- (AppDelegate *)appDelegate;
 - (void)showHUD:(NSString *)title showDim:(BOOL)isDim;
 - (void)showHUDComplete:(NSString *)title;
 - (void)hideHUD;

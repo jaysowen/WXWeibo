@@ -14,6 +14,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "MainViewController.h"
 #import "DetailViewController.h"
+#import "AppDelegate.h"
 
 @interface HomeViewController ()
 
@@ -57,6 +58,20 @@
         //加载微博列表数据
         [self loadWeiboData];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // 开启左划、右划
+    [[self appDelegate].menuCtrl setEnableGesture:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // 禁用左划、右划
+    [[self appDelegate].menuCtrl setEnableGesture:NO];
 }
 
 //下拉加载最新微博数据
@@ -277,6 +292,15 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+    // 判断当前控制器的视图是否显示，window!=nil是显示，window==nil是不显示
+    if (WXHLOSVersion() >= 6.0) {
+        if (self.view.window == nil) {
+            self.view = nil;
+            // for the compatibility of ios version below 6.0
+            [self viewDidUnload];
+        }        
+    }
 }
 
 - (void)dealloc {
@@ -285,7 +309,7 @@
 }
 
 - (void)viewDidUnload {
-    
+    [super viewDidUnload];
 }
 
 #pragma mark UITableViewEventDelegate

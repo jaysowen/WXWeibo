@@ -73,7 +73,7 @@ typedef enum {
 - (void)showRightController:(BOOL)animated;  // show right
 - (void)showLeftController:(BOOL)animated;  // show left
 
-//-------------wei.chen----------------
+//-------------wei.chen 自己添加的代码，控制左划右划开关----------------
 - (void)setEnableGesture:(BOOL)isEnable;
 
 @end
