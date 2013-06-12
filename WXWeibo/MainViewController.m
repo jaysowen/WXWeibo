@@ -52,13 +52,13 @@
 #pragma mark UI
 //初始化子控制器
 - (void)_initViewController {
-    HomeViewController *home = [[[HomeViewController alloc] init] autorelease];
+    _home = [[HomeViewController alloc] init];
     MessageViewController *message = [[[MessageViewController alloc] init] autorelease];
     ProfileViewController *profile = [[[ProfileViewController alloc] init] autorelease];
     DiscoverViewController *discover = [[[DiscoverViewController alloc] init] autorelease];
     MoreViewController *more = [[[MoreViewController alloc] init] autorelease];
     
-    NSArray *views = @[home,message,profile,discover,more];
+    NSArray *views = @[_home,message,profile,discover,more];
     NSMutableArray *viewControllers = [NSMutableArray arrayWithCapacity:5];
     for (UIViewController *viewController in views) {
         BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:viewController];
@@ -113,9 +113,7 @@
     
     // 判断是否为重复点击home按钮，如是，则刷新微博
     if (button.tag == self.selectedIndex && (button.tag == 0)) {
-        UINavigationController *homeNav = self.viewControllers[0];
-        HomeViewController *homeCtrl = homeNav.viewControllers[0];
-        [homeCtrl refreshWeibo];
+        [_home refreshWeibo];
     }
     
     self.selectedIndex = button.tag;
@@ -131,11 +129,18 @@
                               sinaweibo.refreshToken, @"refresh_token", nil];
     [[NSUserDefaults standardUserDefaults] setObject:authData forKey:@"SinaWeiboAuthData"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [_home loadWeiboData];
 }
 
 - (void)sinaweiboDidLogOut:(SinaWeibo *)sinaweibo {
     //移除认证的数据
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SinaWeiboAuthData"];
+    //记得同步
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    //登陆页面
+    _home.tableView.hidden = YES;
+    [_home.sinaweibo logIn];
 }
 
 - (void)sinaweiboLogInDidCancel:(SinaWeibo *)sinaweibo {

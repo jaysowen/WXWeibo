@@ -25,5 +25,10 @@
 #define kNavigationBarTitleLabel @"kNavigationBarTitleLabel"
 #define kThemeListLabel          @"kThemeListLabel"
 
+//------------通知------------
+#define kReloadWeiboTableNotification @"kReloadWeiboTableNotification"
 
 #define kThemeName @"kThemeName"
+#define kBrowseMode @"kBrowseMode"
+#define LargeBrowseMode 1 // 大图浏览模式
+#define SmallBrowseMode 0 // 小图浏览模式(默认)

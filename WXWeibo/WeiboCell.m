@@ -126,8 +126,10 @@
     //获取微博视图的高度
     float h = [WeiboView getWeiboViewHeight:_weiboModel isRepost:NO isDetail:NO];
     _weiboView.frame = CGRectMake(50, _nickLabel.bottom+10, kWeibo_Width_List, h);
-    
-    
+    // For iOS 5.x, you will need to call the weiboView's layoutSubviews method,
+    // as the weiboView's layoutSubviews method gets called only once
+    // or the layout will be messed up
+    [_weiboView setNeedsLayout];
 }
 
 - (NSString *)getParsedSource:(NSString *)source {

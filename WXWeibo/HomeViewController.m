@@ -50,13 +50,16 @@
     //WeiboTableView
     _tableView = [[WeiboTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-20-49-44) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
-    
+    _tableView.hidden = YES;
     _tableView.eventDelegate = self;
     
     //判断是否认证
     if (self.sinaweibo.isAuthValid) {
         //加载微博列表数据
         [self loadWeiboData];
+    } else {
+        //登陆页面
+        [self.sinaweibo logIn];
     }
 }
 
@@ -135,6 +138,7 @@
    [self.tableView performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.0];
     //[super hideHUD];
     [super performSelector:@selector(showHUDComplete:) withObject:@"加载成功" afterDelay:0.5];
+    self.tableView.hidden = NO;
 }
 
 - (void)didFinishLoadingAllWeiboWithResult:(id)result {

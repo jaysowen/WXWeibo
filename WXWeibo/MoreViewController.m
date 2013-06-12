@@ -8,6 +8,7 @@
 
 #import "MoreViewController.h"
 #import "ThemeViewController.h"
+#import "BrowseModeController.h"
 
 @interface MoreViewController ()
 
@@ -50,16 +51,23 @@
     UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     if (indexPath.row == 0) {
         cell.textLabel.text = @"主题";
+    } else if (indexPath.row == 1) {
+        cell.textLabel.text = @"图片浏览模式";
     }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIViewController *vc = nil;
+    
     if (indexPath.row == 0) {
-        ThemeViewController *themeCtrl = [[ThemeViewController alloc] init];
-        [self.navigationController pushViewController:themeCtrl animated:YES];
-        [themeCtrl release];
+        vc = [[ThemeViewController alloc] init];
+    } else if (indexPath.row == 1) {
+        vc = [[BrowseModeController alloc] init];
     }
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc release];
 }
 
 @end

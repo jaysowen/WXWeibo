@@ -29,4 +29,5 @@ typedef enum {
 @property (nonatomic, copy) NSString *lastWeiboId;
 
 - (void)refreshWeibo;
+- (void)loadWeiboData;
 @end

@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "SinaWeibo.h"
+#import "HomeViewController.h"
 
 @interface MainViewController : UITabBarController<SinaWeiboDelegate, SinaWeiboRequestDelegate, UINavigationControllerDelegate> {
     UIView *_tabbarView;
     UIImageView *_sliderView;
     UIImageView *_badgeView;
+    HomeViewController *_home;
 }
 
 - (void)showBadge:(BOOL)shouldShow;

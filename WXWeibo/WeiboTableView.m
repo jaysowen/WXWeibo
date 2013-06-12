@@ -12,6 +12,15 @@
 
 @implementation WeiboTableView
 
+- (id)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
+    self = [super initWithFrame:frame style:style];
+    if (self != nil) {
+        // 监听通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:kReloadWeiboTableNotification object:nil];
+    }
+    return self;
+}
+
 #pragma mark - UITableView delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.data.count;
