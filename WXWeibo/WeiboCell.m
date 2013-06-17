@@ -13,6 +13,7 @@
 #import "UIImageView+WebCache.h"
 #import "UIUtils.h"
 #import "RegexKitLite.h"
+#import "UserViewController.h"
 
 @implementation WeiboCell
 
@@ -28,13 +29,24 @@
 //初始化子视图
 - (void)_initView {
     //用户头像
-    _userImage = [[UIImageView alloc] initWithFrame:CGRectZero];
+    _userImage = [[WXImageView alloc] initWithFrame:CGRectZero];
     _userImage.backgroundColor = [UIColor clearColor];
     _userImage.layer.cornerRadius = 5;  //圆弧半径
     _userImage.layer.borderWidth = .5;
     _userImage.layer.borderColor = [UIColor grayColor].CGColor;
     _userImage.layer.masksToBounds = YES;
+    _userImage.touchBlock = ^{
+        UserViewController *userVC = [[UserViewController alloc] init];
+        userVC.userName = self.weiboModel.user.screen_name;
+        [self.viewController.navigationController pushViewController:userVC animated:YES];
+    };
     [self.contentView addSubview:_userImage];
+    //透明按钮，提供用户头像的响应事件(可设置gesture代替)
+//    _userImageButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    _userImageButton.frame = CGRectZero;
+//    _userImageButton.backgroundColor = [UIColor clearColor];
+//    [_userImageButton addTarget:self action:@selector(userImageAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self.contentView addSubview:_userImageButton];
     
     //昵称
     _nickLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -89,6 +101,7 @@
     _userImage.frame = CGRectMake(5, 5, 35, 35);
     NSString *userImageUrl = _weiboModel.user.profile_image_url;
     [_userImage setImageWithURL:[NSURL URLWithString:userImageUrl]];
+    _userImageButton.frame = _userImage.frame;
     
     //昵称_nickLabel
     _nickLabel.frame = CGRectMake(50, 5, 200, 20);

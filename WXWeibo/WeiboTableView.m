@@ -52,6 +52,9 @@
     if ([self.eventDelegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
         [self.eventDelegate tableView:self didSelectRowAtIndexPath:indexPath];
     }
+    
+    // 选中cell后立即取消选中
+    [self deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 @end

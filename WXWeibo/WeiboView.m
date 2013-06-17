@@ -14,6 +14,7 @@
 #import "UIUtils.h"
 #import "NSString+URLEncoding.h"
 #import "UserViewController.h"
+#import "WebViewController.h"
 
 
 #define LIST_FONT   14.0f           //列表中文本字体
@@ -304,6 +305,9 @@
             userVC.userName = urlString;
         }
         [self.viewController.navigationController pushViewController:userVC animated:YES];
+    } else if ([absoluteString hasPrefix:@"http"]) {
+        WebViewController *webVC = [[WebViewController alloc] initWithURL:absoluteString];
+        [self.viewController.navigationController pushViewController:webVC animated:YES];
     }
 }
 

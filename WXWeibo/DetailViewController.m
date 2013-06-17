@@ -10,6 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "WeiboModel.h"
 #import "CommentModel.h"
+#import "UserViewController.h"
 
 @interface DetailViewController ()
 
@@ -43,9 +44,16 @@
     self.userImageView.layer.masksToBounds = YES;
     [self.userImageView setImageWithURL:[NSURL URLWithString:userImageUrl]];
     self.nickLabel.text = _weiboModel.user.screen_name;
+    self.userBarView.userInteractionEnabled = YES;
     
     [tableHeaderView addSubview:self.userBarView];
     tableHeaderView.height += self.userBarView.height;
+    // 添加透明按钮，使userBarView响应点击事件
+//    UIButton *transparentButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    transparentButton.backgroundColor = [UIColor clearColor];
+//    transparentButton.frame = self.userBarView.frame;
+//    [transparentButton addTarget:self action:@selector(userAction) forControlEvents:UIControlEventTouchUpInside];
+//    [tableHeaderView addSubview:transparentButton];
     
     //---------------------创建微博效果-----------------------
     float h = [WeiboView getWeiboViewHeight:self.weiboModel isRepost:NO isDetail:YES];
@@ -162,6 +170,12 @@
 #pragma mark - UITableviewEventDelegate
 - (void)pullUp:(BaseTableView *)tableView {
     [self pullUpData];
+}
+
+- (void)userAction {
+    UserViewController *userVC = [[UserViewController alloc] init];
+    userVC.userName = self.weiboModel.user.screen_name;
+    [self.navigationController pushViewController:userVC animated:YES];
 }
 
 @end

@@ -11,9 +11,10 @@
 #import "CommentModel.h"
 #import "UIImageView+WebCache.h"
 #import "CommentModel.h"
+#import "WXImageView.h"
 
 @interface CommentCell : UITableViewCell <RTLabelDelegate> {
-    UIImageView *_userImage;
+    WXImageView *_userImage;
     UILabel *_nickLabel;
     UILabel *_timeLabel;
     RTLabel *_contentLabel;

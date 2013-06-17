@@ -18,6 +18,10 @@
 + (ThemeButton *)createButton:(NSString *)imageName highlighted:(NSString *)highlightedName;
 + (ThemeButton *)createButtonWithBackground:(NSString *)backgroundImageName
                                 backgroundHighlighted:(NSString *)highlightedName;
++ (UIButton *)createNavigationButton:(CGRect)frame
+                              title:(NSString *)title
+                              target:(id)target
+                              action:(SEL)action;
 
 //创建ImageView
 + (ThemeImageView *)createImageView:(NSString *)imageName;

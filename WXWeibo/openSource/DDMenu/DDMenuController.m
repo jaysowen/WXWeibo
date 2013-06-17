@@ -748,4 +748,9 @@
     [self.tap setEnabled:isEnable];
 }
 
+// 在显示DDMenu后，始终将根控制器居中
+- (void)viewDidAppear:(BOOL)animated {
+    [self showRootController:YES];
+}
+
 @end

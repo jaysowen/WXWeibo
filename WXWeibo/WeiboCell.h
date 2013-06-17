@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXImageView.h"
 
 @class WeiboModel;
 @class WeiboView;
 @interface WeiboCell : UITableViewCell {
-    UIImageView     *_userImage;    //用户头像视图
-    UILabel         *_nickLabel;    //昵称
+    WXImageView     *_userImage;    //用户头像视图
+    UIButton        *_userImageButton; // 用户头像按钮(透明)
+    UILabel         *_nickLabel; //昵称
     UILabel         *_repostCountLabel; //转发数
     UILabel         *_commentLabel;     //回复数
     UILabel         *_sourceLabel;      //发布来源

@@ -8,6 +8,7 @@
 
 #import "CommentCell.h"
 #import "UIUtils.h"
+#import "UserViewController.h"
 
 @implementation CommentCell
 
@@ -21,7 +22,13 @@
 }
 
 - (void)awakeFromNib {
-    _userImage = [(UIImageView *)[self viewWithTag:100] retain];
+    _userImage = [(WXImageView *)[self viewWithTag:100] retain];
+    _userImage.touchBlock = ^{
+        UserViewController *userVC = [[UserViewController alloc] init];
+        userVC.userName = self.commentModel.user.screen_name;
+        [self.viewController.navigationController pushViewController:userVC animated:YES];
+        //[userVC release];
+    };
     _nickLabel = [(UILabel *)[self viewWithTag:101] retain];
     _timeLabel = [(UILabel *)[self viewWithTag:102] retain];
     

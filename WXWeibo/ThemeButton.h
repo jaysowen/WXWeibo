@@ -20,6 +20,10 @@
 //高亮状态下的背景图片名称
 @property(nonatomic,copy)NSString *backgroundHighligtImageName;
 
+//位置图片控件的位置
+@property(nonatomic,assign)int leftCapWidth; //横向离原点的位置
+@property(nonatomic,assign)int topCapWidth;  //纵向离原点的位置
+
 - (id)initWithImage:(NSString *)imageName highlighted:(NSString *)highligtImageName;
 
 - (id)initWithBackground:(NSString *)backgroundImageName

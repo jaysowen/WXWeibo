@@ -10,7 +10,14 @@
 #import "WeiboTableView.h"
 #import "UserInfoView.h"
 
-@interface UserViewController : BaseViewController <SinaWeiboRequestDelegate>
+typedef enum {
+    GET_USER,
+    GET_WEIBO
+} QueryType;
+
+@interface UserViewController : BaseViewController <SinaWeiboRequestDelegate, UITableviewEventDelegate> {
+    QueryType _queryType;
+}
 
 @property (retain, nonatomic) IBOutlet WeiboTableView *tableView;
 @property (retain, nonatomic) UserInfoView *userInfoView;

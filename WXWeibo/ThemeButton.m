@@ -56,13 +56,16 @@
     
     UIImage *image = [themeManager getThemeImage:_imageName];
     UIImage *highligtImage = [themeManager getThemeImage:_highligtImageName];
+    image = [image stretchableImageWithLeftCapWidth:_leftCapWidth topCapHeight:_topCapWidth];
+    highligtImage = [highligtImage stretchableImageWithLeftCapWidth:_leftCapWidth topCapHeight:_topCapWidth];
     
     [self setImage:image forState:UIControlStateNormal];
     [self setImage:highligtImage forState:UIControlStateHighlighted];
     
-    
     UIImage *backImage = [themeManager getThemeImage:_backgroundImageName];
     UIImage *backHighligtImage = [themeManager getThemeImage:_backgroundHighligtImageName];
+    backImage = [backImage stretchableImageWithLeftCapWidth:_leftCapWidth topCapHeight:_topCapWidth];
+    backHighligtImage = [backHighligtImage stretchableImageWithLeftCapWidth:_leftCapWidth topCapHeight:_topCapWidth];
 
     [self setBackgroundImage:backImage forState:UIControlStateNormal];
     [self setBackgroundImage:backHighligtImage forState:UIControlStateHighlighted];
@@ -109,5 +112,14 @@
     [self loadThemeImage];
 }
 
+- (void)setLeftCapWidth:(int)leftCapWidth {
+    _leftCapWidth = leftCapWidth;
+    [self loadThemeImage];
+}
+
+- (void)setTopCapWidth:(int)topCapWidth {
+    _topCapWidth = topCapWidth;
+    [self loadThemeImage];
+}
 
 @end

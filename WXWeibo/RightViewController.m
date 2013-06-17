@@ -7,6 +7,8 @@
 //
 
 #import "RightViewController.h"
+#import "SendViewController.h"
+#import "BaseNavigationController.h"
 
 @interface RightViewController ()
 
@@ -26,7 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor orangeColor];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,4 +37,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)senderAction:(UIButton *)sender {
+    if (sender.tag == 100) {
+        SendViewController *sendVC = [[SendViewController alloc] init];
+        BaseNavigationController *baseNav = [[BaseNavigationController alloc] initWithRootViewController:sendVC];
+        [self.appDelegate.menuCtrl presentViewController:baseNav animated:YES completion:NULL];
+    }
+}
 @end
+
+
+
+
+
+
+
+
+
+
+
+
